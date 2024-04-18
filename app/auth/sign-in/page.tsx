@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signInUser } from "@/lib/actions";
 
 const FormSchema = z.object({
   email: z
@@ -35,8 +36,8 @@ export default function SignIn() {
     resolver: zodResolver(FormSchema),
   });
 
-  const submit: SubmitHandler<FormInput> = (data) =>
-    alert(JSON.stringify(data, null, 2));
+  const submit: SubmitHandler<FormInput> = async (data) =>
+    await signInUser(data);
 
   return (
     <form

@@ -12,26 +12,12 @@ export const authConfig = {
     Google,
     Github,
     Credentials({
-      credentials: {
-        username: {
-          title: "Username",
-          type: "text",
-        },
-        email: {
-          title: "Email",
-          type: "email",
-        },
-        password: {
-          title: "Password",
-          type: "password",
-        },
-      },
       authorize: async (credentials) => {
-        const { username, email, password } = credentials;
-        if (email === "marnhtetzan11@gmail.com" && password === "123456") {
+        const { email, password } = credentials;
+        if (email === "marnhtetzan11@gmail.com" && password === "12345678") {
           return {
-            name: username as string,
             email: email,
+            password,
           };
         }
         return null;
@@ -41,12 +27,12 @@ export const authConfig = {
   callbacks: {
     jwt({ token, user }) {
       if (user) {
-        token.name = user.name;
+        token.email = user.email;
       }
       return token;
     },
     session({ session, token }) {
-      session.user.name = token.name;
+      session.user.email = token.email as string;
       return session;
     },
   },
