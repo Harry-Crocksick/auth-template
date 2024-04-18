@@ -13,6 +13,9 @@ export const authConfig = {
   pages: {
     signIn: "/auth/sign-in",
   },
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     Google,
     Github,
