@@ -4,6 +4,11 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import Github from "next-auth/providers/github";
 
+type CredentialProps = {
+  email: string;
+  password: string;
+};
+
 export const authConfig = {
   pages: {
     signIn: "/auth/sign-in",
@@ -13,11 +18,10 @@ export const authConfig = {
     Github,
     Credentials({
       authorize: async (credentials) => {
-        const { email, password } = credentials;
+        const { email, password } = credentials as CredentialProps;
         if (email === "marnhtetzan11@gmail.com" && password === "12345678") {
           return {
-            email: email,
-            password,
+            email,
           };
         }
         return null;
